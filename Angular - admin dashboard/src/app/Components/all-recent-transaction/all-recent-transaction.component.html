@@ -1,0 +1,94 @@
+
+@if(!isLoading)
+{
+  @for(rent of recentRentedCars; track rent.id)
+{
+
+  @if (rent.car  !== null ) {
+
+    <div  [routerLink]="['/dashboard/transactionDetails',rent._id]" routerLinkActive="router-link-active" class="row car-item my-3">
+     <div class="col-md-12 car-content py-5">
+      <div class="d-flex justify-content-between">
+        <img class="w-25 car-image h-auto" src={{rent?.car?.images[0].url}} alt="">
+        @for(brand of brands;track brand?._id)
+        {
+          @if(brand._id == rent?.car?.brand)
+          {
+            <pre class="fw-bold fs-6 car-name">{{brand?.brand}}  {{rent?.car?.model}}</pre>
+          }
+        }
+        <div>
+          <p>{{rent?.car?.category}}</p>
+        </div>
+        <p>{{rent?.car?.plateNumber}}</p>
+      </div>
+    </div>
+
+      <div class="rent-details">
+        <div class="py-3 d-block d-md-inline-block text-center">
+          <input class="form-check-input" type="radio" name="" id="" checked disabled />
+          <label class="ms-2" for="">Pick-Up</label>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Location</p>
+              <input class="w-100" type="text" disabled [value]="rent?.car?.location.city">
+            </div>
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Date</p>
+              <input class="w-100" type="text" disabled [value]="rent?.from | date:'shortDate'">
+            </div>
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Time</p>
+              <input class="w-100" type="text" disabled value="12:00">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rent">
+        <div class="py-3 d-block d-md-inline-block text-center">
+          <input class="form-check-input" type="radio" name="" id="" checked disabled />
+          <label class="ms-2" for="">Drop-Off</label>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Location</p>
+              <input class="w-100" type="text" disabled [value]="rent?.car?.location.city">
+            </div>
+
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Date</p>
+              <input class="w-100" type="text" disabled [value]="rent?.to | date:'shortDate'">
+            </div>
+            <div class="col-md-4 mb-2">
+              <p class="fw-bold mb-0">Time</p>
+              <input class="w-100" type="text" disabled value="12:00">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <div>
+            <h4 class="fw-bold">Total Rental Price</h4>
+            <p class="text-muted">Overall price and includes rental discount</p>
+          </div>
+          <div>
+            <h4 class="fw-bold">{{rent?.finalPrice}} EGP</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+}
+}@else {
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+}
+

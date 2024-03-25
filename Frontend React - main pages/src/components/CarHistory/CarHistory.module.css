@@ -1,0 +1,20 @@
+.image {
+    width: 100%;
+    border : 1px solid transparent;
+    border-radius : 5px;
+}
+
+/* .stack {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* flex-direction: row; 
+}
+
+
+ @media (max-width: 668px) {
+    .stack {
+        flex-direction: column;
+    }
+}
+*/

@@ -1,0 +1,246 @@
+
+
+
+<div routerLinkActive="router-link-active" class="row car-item py-4">
+  <div class="col-md-12 car-content">
+    <div class="d-flex justify-content-evenly">
+      <img class="w-25 car-image h-auto" src="../../../assets/users.jpg" alt="">
+      <div>
+        <div><h4 class="fw-bold car-name">{{user?.firstName}} {{user?.lastName}}</h4> </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Address</p>
+          <input class="w-100" type="text" disabled [value]=user?.address>
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Email</p>
+          <input class="w-100" type="text" disabled [value]=user?.email/>
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Phone</p>
+          <input class="w-100" type="text" disabled [value]=user?.phone>
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Driver License</p>
+          <input class="w-100" type="text" disabled [value]=user?.driverLicense>
+        </div>
+      </div>
+      <mat-tab-group>
+        <mat-tab label="Owned Cars">
+          @if (user?.ownedCars.length === 0) {
+            <span>This User Has No Owned Cars</span>
+          }@else {
+            <cdk-accordion class="example-accordion">
+              @for (item of rentedCars; track item._id) {
+                <cdk-accordion-item
+
+                  #accordionItem="cdkAccordionItem"
+                  class="example-accordion-item"
+                  role="button"
+                  tabindex="0"
+                  [attr.id]="'accordion-header-' + item._id"
+                  [attr.aria-expanded]="accordionItem.expanded"
+                  [attr.aria-controls]="'accordion-body-'+ item._id">
+                  <div class="example-accordion-item-header d-flex justify-content-around" (click)="accordionItem.toggle()">
+                      <span>{{item.plateNumber}}</span>
+                    <span class="example-accordion-item-description">
+                      Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+                    </span>
+
+                  </div>
+                  <div
+                  [routerLink]="['/carsLayout/carDetails',item._id]" routerLinkActive="router-link-active"
+                  class="example-accordion-item-body"
+                  role="region"
+                  [style.display]="accordionItem.expanded ? '' : 'none'"
+                  [attr.id]="'accordion-body-' + item.id"
+                  [attr.aria-labelledby]="'accordion-header-' + item.id">
+                  <div
+                  class="example-accordion-item-body"
+                  role="region"
+                  [style.display]="accordionItem.expanded ? '' : 'none'"
+                  [attr.id]="'accordion-body-' + item.id"
+                  [attr.aria-labelledby]="'accordion-header-' + item.id">
+                  <div routerLinkActive="router-link-active" class="row car-item">
+                    <div class="col-md-12 car-content">
+                      <div class="d-flex justify-content-between">
+                        <img class="w-25 car-image h-auto" [src]=item.images[0].url alt="">
+                        <div>
+                          <div><h4 class="fw-bold car-name">{{item.model}}</h4> </div>
+                        </div>
+                        <div><p>{{item.category}}</p></div>
+                        <p>{{item.plateNumber}}</p>
+                      </div>
+                    </div>
+
+                    <div class="rent-details">
+
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Location</p>
+                            <input class="w-100" type="text" disabled [value]="item.location.city">
+                          </div>
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Capacity</p>
+                            <input class="w-100" type="text" disabled [value]="item.capacity">
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="rent">
+
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Tank</p>
+                            <input class="w-100" type="text" disabled  [value]="item.tankCapacity">
+                          </div>
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Transmission</p>
+                            <input class="w-100" type="text" disabled [value]="item.transmission">
+                          </div>
+
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h4 class="fw-bold"> Rental Price</h4>
+
+                        </div>
+                        <div>
+                          <h4 class="fw-bold">{{item.priceForDay | currency:'EGP'}}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </cdk-accordion-item>
+              }
+            </cdk-accordion>
+
+
+          }
+        </mat-tab>
+        <mat-tab label="Rented Cars">
+          @if (user?.rentedCars.length === 0) {
+            <span class="text-center py-3">This User Didnt Rent Any Car</span>
+          } @else {
+            <cdk-accordion class="example-accordion">
+              @for (item of rentedCars; track item._id) {
+                <cdk-accordion-item
+
+                  #accordionItem="cdkAccordionItem"
+                  class="example-accordion-item"
+                  role="button"
+                  tabindex="0"
+                  [attr.id]="'accordion-header-' + item._id"
+                  [attr.aria-expanded]="accordionItem.expanded"
+                  [attr.aria-controls]="'accordion-body-'+ item._id">
+                  <div class="example-accordion-item-header d-flex justify-content-around" (click)="accordionItem.toggle()">
+                      <span>{{item.plateNumber}}</span>
+                    <span class="example-accordion-item-description">
+                      Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+                    </span>
+
+                  </div>
+                  <div
+                  [routerLink]="['/carsLayout/carDetails',item._id]" routerLinkActive="router-link-active"
+                  class="example-accordion-item-body"
+                  role="region"
+                  [style.display]="accordionItem.expanded ? '' : 'none'"
+                  [attr.id]="'accordion-body-' + item.id"
+                  [attr.aria-labelledby]="'accordion-header-' + item.id">
+                  <div
+                  class="example-accordion-item-body"
+                  role="region"
+                  [style.display]="accordionItem.expanded ? '' : 'none'"
+                  [attr.id]="'accordion-body-' + item.id"
+                  [attr.aria-labelledby]="'accordion-header-' + item.id">
+                  <div routerLinkActive="router-link-active" class="row car-item">
+                    <div class="col-md-12 car-content">
+                      <div class="d-flex justify-content-between">
+                        <img class="w-25 car-image h-auto" [src]=item.images[0].url alt="">
+                        <div>
+                          <div><h4 class="fw-bold car-name">{{item.model}}</h4> </div>
+                        </div>
+                        <div><p>{{item.category}}</p></div>
+                        <p>{{item.plateNumber}}</p>
+                      </div>
+                    </div>
+
+                    <div class="rent-details">
+
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Location</p>
+                            <input class="w-100" type="text" disabled [value]="item.location.city">
+                          </div>
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Capacity</p>
+                            <input class="w-100" type="text" disabled [value]="item.capacity">
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="rent">
+
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Tank</p>
+                            <input class="w-100" type="text" disabled  [value]="item.tankCapacity">
+                          </div>
+                          <div class="col-md-4 mb-2">
+                            <p class="fw-bold mb-0">Transmission</p>
+                            <input class="w-100" type="text" disabled [value]="item.transmission">
+                          </div>
+
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h4 class="fw-bold">Total Rental Price</h4>
+                          <p class="text-muted">Overall price and includes rental discount</p>
+                        </div>
+                        <div>
+                          <h4 class="fw-bold">{{item.priceForDay}} EGP</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </cdk-accordion-item>
+              }
+            </cdk-accordion>
+
+
+          }
+        </mat-tab>
+      </mat-tab-group>
+      <button (click)="deleteUser()" class="btn btn-danger mt-4">Delete</button>
+    </div>
+  </div>
+
+
+</div>

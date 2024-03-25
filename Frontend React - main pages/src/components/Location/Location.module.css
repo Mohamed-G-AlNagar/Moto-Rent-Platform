@@ -1,0 +1,35 @@
+.form {
+  padding: 2%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 2% 0;
+  width: 100%;
+  max-width: 582px; 
+  box-sizing: border-box;
+
+
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap:30px
+}
+
+.field {
+  width: 120px;
+  box-sizing: border-box;
+  margin-bottom: 1%;
+}
+
+@media (max-width: 668px) {
+  .form {
+    padding: 3%;
+  }
+  .field {
+    width: 60px;
+  }
+}
+
+

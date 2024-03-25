@@ -1,0 +1,47 @@
+.carspage {
+background-color: #eee;
+height: 100vh;
+overflow: scroll;
+overflow-x: hidden;
+}
+.carspage::-webkit-scrollbar {
+  width: 12px; 
+}
+
+.carspage::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 10px; 
+}
+
+.carspage::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+}
+
+
+.locationContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.card { 
+  display: 'flex';
+}
+
+
+
+@media (max-width: 600px) {
+    .sidebar {
+      display: none;
+    }
+    .locationContainer {
+      flex-direction: column;
+    }
+    .card { 
+       justify-content: 'center';
+    }
+}
+
+
+  

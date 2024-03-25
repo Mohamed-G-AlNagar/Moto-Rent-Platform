@@ -1,0 +1,50 @@
+
+
+
+@if (!isLoading) {
+  <div class="container">
+    <div class="row">
+      <h4 class="text-center">All Users</h4>
+      <div class="align-items-center">
+       <input
+       [(ngModel)]="userSearch"
+         type="text"
+         placeholder="Search User"
+         class="form-control w-75 mx-auto mt-5"
+       />
+     </div>
+    @for (user of users | userSearch:userSearch ;track user.id ) {
+
+
+      <div class="col-md-4 g-5 ">
+        <div [routerLink]="['userDetails',user.id]" class="card user-item" style="width: 18rem;">
+          <div class="card-body">
+            <img class="w-100"  src="../../../../assets/users.jpg" alt="">
+            <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+            <p>{{user.email}}</p>
+            <p>{{user.address}}</p>
+            <p>{{user.driverLicense}}</p>
+
+          </div>
+        </div>
+      </div>
+
+    }
+
+
+
+
+  </div>
+  </div>
+}@else {
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+}
+
+
+
+
+
+
+

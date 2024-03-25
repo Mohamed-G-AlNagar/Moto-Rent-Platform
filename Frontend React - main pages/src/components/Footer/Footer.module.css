@@ -1,0 +1,46 @@
+.footer {
+  padding: 2% 4%; 
+  background-color: #fff;
+  margin-top: 50px;
+}
+
+.upper {
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+}
+
+.about li,
+.community li,
+.socials li {
+  list-style: none;
+  margin-bottom: 2%;
+  color: #90a3bf;
+}
+
+.lower {
+  margin-top: 2%; 
+  padding: 2%; 
+}
+
+
+@media only screen and (max-width: 768px) {
+  .footer {
+    padding: 4% 4%; 
+  }
+
+  .upper {
+    flex-direction: column;
+  }
+
+  .about li,
+  .community li,
+  .socials li {
+    margin-bottom: 4%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .footer {
+    padding: 6% 4%;
+  }
+}

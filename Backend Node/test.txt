@@ -1,0 +1,132 @@
+import mongoose from "mongoose";
+
+const carSchema = new mongoose.Schema(
+  {
+    ownerId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: [true, "Car owner is required"],
+    },
+    manufacturingYear: {
+      type: Number,
+      required: [true, "Car manufacturingYear is required"],
+    },
+    model: {
+      type: String,
+      required: [true, "Car model is required"],
+      trim: true,
+    },
+    brand: {
+      type: mongoose.Schema.ObjectId,
+      required: [true, "Car brandId is required"],
+      ref: "Brand",
+    },
+    category: {
+      type: String,
+      enum: ["SUV", "Sedan", "Hatchback", "Coupe", "Convertible", "Wagon"],
+      required: [true, "Car category is required"],
+      default: "Sedan",
+    },
+    tankCapacity: {
+      type: Number,
+      required: [true, "Car tankCapacity is required"],
+    },
+    average: {
+      type: Number,
+      required: [true, "Car average KM is required"],
+    },
+    transmission: {
+      enum: ["auto", "manual"],
+    },
+    capacity: {
+      type: Number,
+      required: [true, "Car capacity is required"],
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ["available", "rented", "pending", "rejected"],
+      required: [true, "Car status is required"],
+      default: "pending",
+    },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
+    priceForDay: {
+      type: Number,
+      required: [true, "Car price for day is required"],
+    },
+    location: {
+      city: { type: String, required: [true, "city is required"] },
+      area: { type: String, required: [true, "area is required"] },
+      description: { type: String },
+    },
+    totalKM: {
+      type: Number,
+      default: 0,
+    },
+    plateNumber: {
+      type: String,
+      required: [true, "Please Enter car palate number"],
+      unique: [true, "Car already exists"],
+    },
+    documents: {
+      insurance: {
+        id: {
+          type: String, required: true,
+          required: [true, "Please Enter car insurance id"],
+        },
+        url: {
+          type: String, required: true,
+          required: [true, "Please Enter car insurance url"],
+        },
+      },
+      carLicense: {
+        id: {
+          type: String, required: true,
+          required: [true, "Please Enter carLicense id"],
+        },
+        url: {
+          type: String, required: true,
+          required: [true, "Please Enter carLicense url"],
+        },
+      },
+      carInspection: {
+        id: {
+          type: String, required: true,
+          required: [true, "Please Enter car id"],
+        },
+        url: {
+          type: String, required: true,
+          required: [true, "Please Enter car url"],
+        },
+      },
+    },
+    images: [
+      {
+        id: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+    ],
+    rating: {
+      type: Number,
+      default: 1,
+      min: 1,
+      max: 5,
+    },
+  },
+  {
+    timestamps: true,
+    virtuals: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+const Car = mongoose.model("Car", carSchema);
+
+export default Car;

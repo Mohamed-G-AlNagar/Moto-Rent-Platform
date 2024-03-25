@@ -1,0 +1,49 @@
+
+
+<div class="bg-image">
+  <div class="container d-flex justify-content-center align-items-center vh-100 ">
+    <div class="w-50">
+
+      <form (ngSubmit)="login()" [formGroup]="formGroup" class=" form-container">
+        <h2 class="main-color text-center fw-bold">MotoRent</h2>
+        <h4 class="text-center py-3"> Login</h4>
+        @if(error)
+        {
+          <div class="text-danger text-center py-3" role="alert">
+            {{error}}
+          </div>
+        }
+        <span class="text-danger"></span>
+        <div>
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input class="form-control" type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+            @if (email?.errors?.['email'] && !email?.errors?.['required']) {
+            <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (email?.errors?.['required']) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" >
+            <button class="border-0 bg-transparent" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+            @if (password?.errors?.['required']) {
+            <mat-error>Password Is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+          <button [disabled]="!formGroup.valid" type="submit" class="btn btn-primary d-block mx-auto w-75 mt-5">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

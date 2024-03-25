@@ -1,0 +1,143 @@
+
+
+
+<div routerLinkActive="router-link-active" class="row car-item py-4">
+  <div class="col-md-12 car-content">
+    <div class="d-flex justify-content-between align-items-center">
+      <img class=" w-50 car-image h-auto  "  [src]="car?.images[0]?.url ? car?.images[0].url : car?.images[1]?.url" alt="">
+      <div class="d-flex flex-column justify-content-center align-items-center " >
+        <div><h4 class="fw-bold car-name">{{car?.brand.brand}} {{car?.model}}</h4> </div>
+        <h5 class="mt-4 ">{{car?.category}}</h5>
+      <h5 >{{car?.plateNumber}}</h5>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Area</p>
+          <input class="w-100" type="text" disabled value={{car?.location.area}}>
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">City</p>
+          <input class="w-100" type="text" disabled value={{car?.location.city}}>
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0">Street</p>
+          <input class="w-100" type="text" disabled value={{car?.location.description}}>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rent">
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Year</p>
+          <input class="w-100" type="text" disabled value={{car?.manufacturingYear}}>
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Tank</p>
+          <input class="w-100" type="text" disabled value={{car?.tankCapacity}}L>
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Transmission</p>
+          <input class="w-100" type="text" disabled value={{car?.transmission}}>
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Car Owner</p>
+
+          <input class="w-100" type="text" disabled [value]="carOwner?.firstName + ' ' + carOwner?.lastName">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Active</p>
+          <input class="w-100" type="text" disabled [value]="car?.active ? 'Yes' : 'No'">
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Approved</p>
+          <input class="w-100" type="text" disabled [value]="car?.approved ? 'Yes' : 'No'">
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Status</p>
+          <input class="w-100" type="text" disabled value={{car?.status}}>
+        </div>
+        <div class="col-md-3 mb-2">
+          <p class="fw-bold mb-0">Car Capacity</p>
+          <input class="w-100" type="text" disabled value={{car?.capacity}}>
+        </div>
+      </div>
+    </div>
+    <div class="container py-4 text-center">
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0 py-2">Car Inspection</p>
+          <img class="w-100 car-image " [src]=car?.documents.carInspection.url alt="">
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0 py-2">Car License</p>
+           <img class=" w-100 car-image  " [src]=car?.documents.carLicense.url alt="">
+        </div>
+        <div class="col-md-4 mb-2">
+          <p class="fw-bold mb-0 py-2">Insurance</p>
+          <img class="w-100 car-image" [src]=car?.documents.insurance.url alt="">
+        </div>
+      </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    @if(car?.status === 'pending' || car?.status === 'rejected' || car?.status === 'available')
+    {
+      <button (click)="deleteCar()" class="btn btn-danger">Delete</button>
+    }
+    <hr>
+    <div class="d-flex justify-content-between">
+      <div>
+        <h4 class="fw-bold"> Rental Price</h4>
+      </div>
+      <div>
+        <h4 class="fw-bold">{{car?.priceForDay}} EGP</h4>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between py-3">
+    @if(!car?.approved && car?.status === 'pending' || car?.status === 'rejected')
+    {
+      <button (click)="approveCar()" class="btn btn-success">Accept</button>
+      <button (click)="declineCar()" class="btn btn-danger">Decline</button>
+    } @else if(car?.active && car.status === 'available' || car?.status === 'rented'){
+      <button (click)="suspendCar()" class="btn btn-danger">Suspend</button>
+    }@else if (!car?.active && car?.status !== 'available' && car?.approved){
+          <button (click)="activeCar()" class="btn btn-success">Active</button>
+    }
+    </div>
+
+  </div>
+</div>

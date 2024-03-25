@@ -1,0 +1,81 @@
+
+@if(!isLoading)
+{
+  <select class="form-select w-75 mx-auto"  [(ngModel)]="selectedStatus" (change)="getAllMessages(selectedStatus)" aria-label="Default select example">
+    <option selected value="">All</option>
+    <option value="pending">Pending</option>
+    <option value="solved">Solved</option>
+  </select>
+  <div class="align-items-center py-3">
+    <input
+    [(ngModel)]="searchUserMessages"
+      type="text"
+      placeholder="Search User Messages"
+      class="form-control w-75 mx-auto"
+    />
+  </div>
+
+  <cdk-accordion class="example-accordion">
+    @for (message of messages |messagesSearch:searchUserMessages; track message._id ) {
+      <cdk-accordion-item
+
+        #accordionItem="cdkAccordionItem"
+        class="example-accordion-item"
+        role="button"
+        tabindex="0"
+        [attr.id]="'accordion-header-' +  message?._id"
+        [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + message?._id">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+
+          <p>{{message?.user?.firstName}}  {{message?.user?.lastName}}</p>
+              <p>{{ message?.title }}</p>
+
+          <span class="example-accordion-item-description">
+            Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+          </span>
+        </div>
+        <div
+          class="example-accordion-item-body"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + message?._id"
+          [attr.aria-labelledby]="'accordion-header-' +  message._id">
+          <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex justify-content-around align-items-center">
+              @if (message.attachments){
+
+                <img class="w-50 car-image h-auto" [src]="message?.attachments ? message.attachments.url:'' "  alt="">
+              }
+              <p class="mx-auto">{{message?.body}}</p>
+            </div>
+            <div class="py-3">
+              @if(message.status === 'pending')
+              {
+                @if(replayIndex === message._id)
+                {
+                  <form (ngSubmit)="replayMessage(message?._id)" [formGroup]="formGroup" class=" form-container">
+                    <textarea class="form-control" formControlName="replay" placeholder="Replay The Message" cols="30" rows="5"></textarea>
+                    <button  class="btn btn-primary mt-4">Send <mat-icon class="pt-1">send</mat-icon></button>
+                  </form>
+                }@else {
+
+                  <button (click)="handleReplay(message?._id) " class="btn btn-success mt-4">Reply</button>
+                }
+
+              }
+
+            </div>
+          </div>
+          <button (click)="deleteMessage(message?._id) " class="btn btn-danger mt-3">Delete</button>
+        </div>
+        <hr>
+      </cdk-accordion-item>
+    }
+  </cdk-accordion>
+}@else {
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+}
+

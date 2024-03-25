@@ -1,0 +1,20 @@
+.slider {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  
+}
+.cardHover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px 3px #54A6FF;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardClick {
+  transform: scale(1.1);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card{
+  border-radius: 8px;
+}

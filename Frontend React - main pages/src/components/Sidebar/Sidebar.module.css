@@ -1,0 +1,12 @@
+.sidebar { 
+    background-color: #fff;
+    height: 85vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: auto;
+}
+@media (max-width: 668px) {
+    .sidebar {
+        display: none;
+    }
+}

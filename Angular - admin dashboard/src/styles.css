@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+
+
+
+html, body { height: 100%; }
+body { margin: 0;  font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.main-color
+{
+  color:#3563E9
+}
+.cusrsor
+{
+  cursor: pointer;
+}
+.car-item {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.user-item {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.car-item:hover {
+  transform: scale(1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.car-content {
+  display: flex;
+  align-items: center;
+}
+
+.car-image {
+  width: 100px;
+  height:300px;
+  margin-right: 20px;
+}
+
+.car-details {
+  flex-grow: 1;
+}
+
+.car-name {
+  margin: 0;
+}
+
+.car-type {
+  margin-top: 5px;
+}
+
+.car-id {
+  margin: 0;
+}
+
+
+.car
+{
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+
+}
+.car::-webkit-scrollbar-thumb
+{
+  color: #3563E9;
+  border-radius: 10px;
+}
+.car::-webkit-scrollbar-track
+{
+  background-color: #999;
+}
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

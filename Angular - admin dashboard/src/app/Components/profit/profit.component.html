@@ -1,0 +1,59 @@
+
+@if (!isLoading) {
+  <select class="form-select mx-auto w-25" aria-label="Default select example" [(ngModel)]="selectedYear" (change)="getYearRevenue(selectedYear)">
+    <option value="2028">2028</option>
+     <option value="2027">2027</option>
+    <option value="2026">2026</option>
+     <option value="2025">2025</option>
+    <option selected value="2024">2024</option>
+    <option value="2023">2023</option>
+   </select>
+
+
+
+  <!--The content below is only a placeholder and can be replaced.-->
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions?.series"
+      [chart]="chartOptions?.chart"
+      [xaxis]="chartOptions?.xaxis"
+      [markers]="chartOptions?.markers"
+      [stroke]="chartOptions?.stroke"
+      [yaxis]="chartOptions?.yaxis"
+      [dataLabels]="chartOptions?.dataLabels"
+      [title]="chartOptions?.title"
+      [fill]="chartOptions?.fill"
+      [tooltip]="chartOptions?.tooltip"
+      [legend]="chartOptions?.legend"
+    ></apx-chart>
+    <div class="total-revenue-container py-3">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2">Total Revenue for {{ selectedYear }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Total Revenue:</td>
+            <td>{{ totalYearRevenue }} EGP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="total-revenue-container py-3">
+     @for (revenue of totalRevenue; track $index) {
+       <h2>Total Platform Revenue:{{ revenue.revenue }} EGP </h2>
+     }
+   </div>
+  </div>
+
+
+
+}@else {
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+}
+

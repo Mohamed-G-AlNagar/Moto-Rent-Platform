@@ -1,0 +1,61 @@
+
+
+@if (!isLoading) {
+
+  <div class="container">
+    <div class="row">
+     <h4 class="text-center">All Cars</h4>
+     <div class="d-flex align-content-center col-md-12">
+      <div class="col-md-8">
+        <input [(ngModel)]="carSearch" type="text" placeholder="Search Cars" class="form-control mx-auto my-4" />
+       </div>
+       <div class="col-md-4 ms-3">
+         <select class="form-select my-4" aria-label="Default select example" [(ngModel)]="selectedStatus" (change)="getCars(selectedStatus)">
+          <option selected value="">All</option>
+          <option value="rented">Rented</option>
+          <option value="available">Available</option>
+           <option value="pending">Pending</option>
+         </select>
+
+      </div>
+     </div>
+
+    @for (car of cars | carsSearch:carSearch; track car.id) {
+      <div class="col-md-4 g-5 ">
+        <div [routerLink]="['carDetails',car.id]" class="card car-item fixed-hight">
+          <div class="card-body">
+            <h5 class="card-title">{{car.brand.brand}} {{car.model}}</h5>
+            <p>{{car.category}}</p>
+            <img class="w-100 car-image h-auto"  src={{car.images[0].url}} alt="">
+            <div class="d-flex justify-content-between pt-3 icon-color">
+              <div class="d-flex">
+                <span class='material-icons text-muted'>local_gas_station</span>
+                <p>{{car.tankCapacity}}L</p>
+              </div>
+              <p>{{car.transmission}}</p>
+              <div class="d-flex">
+                <mat-icon>supervisor_account </mat-icon>
+              <p>{{car.capacity}} </p>
+              </div>
+            </div>
+            <p class="text-muted">{{car.priceForDay }} EGP / day</p>
+          </div>
+        </div>
+
+      </div>
+
+    }
+  </div>
+  </div>
+}@else {
+
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+}
+
+
+
+
+
+

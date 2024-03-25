@@ -1,0 +1,25 @@
+.accordion-container.MuiPaper-root {
+    width: 75%;
+    border: none !important;
+    box-shadow: none;
+    margin-top: 30px !important;
+}
+
+.accordion-summary.MuiButtonBase-root {
+    border: 1px solid #3563E9;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.accordion-details {
+    border: 1px solid #3563E9;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}

@@ -1,0 +1,71 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light full-width bg-white py-5" style="height: 100vh;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"></a>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      (click)="setActiveLink('dashboard')"
+         [class.active]="activeLink === 'dashboard'"
+         class="nav-link link-dark" aria-current="page">
+         <svg class="bi me-2" width="16" height="16"><use xlink:href="/dashboard"></use></svg>
+         <mat-icon class="pt-1" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/inboxLayout"routerLinkActive="active"
+         (click)="setActiveLink('inboxLayout')"
+         [class.active]="activeLink === 'inboxLayout'"
+         class="nav-link link-dark">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+        <mat-icon  class="pt-1" aria-hidden="false" aria-label="Example email icon" fontIcon="email"></mat-icon>
+        Inbox
+        <span class="badge bg-danger">{{pendingMessages}}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/userLayout" routerLinkActive="active"
+          (click)="setActiveLink('userLayout')"
+         [class.active]="activeLink === 'userLayout'"
+         class="nav-link link-dark">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href=""></use></svg>
+        <mat-icon class="pt-1" aria-hidden="false" aria-label="Example person icon" fontIcon="person"></mat-icon>
+
+        Users
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/carsLayout" routerLinkActive="active"
+      (click)="setActiveLink('carsLayout')"
+      [class.active]="activeLink === 'carsLayout'"
+      class="nav-link link-dark">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+        <mat-icon class="pt-1" aria-hidden="false" aria-label="Example drive_eta icon" fontIcon="drive_eta"></mat-icon>
+        Cars
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/profitLayout" routerLinkActive="active"
+      (click)="setActiveLink('profitLayout')"
+      [class.active]="activeLink === 'profitLayout'"
+      class="nav-link link-dark">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+        <i class="fa-solid fa-chart-line pt-1 fs-5"></i>
+        Profits
+      </a>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li (click)="logOut()"  class="nav-item mt-auto cusrsor">
+      <a class="nav-link link-dark  ">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+        Logout
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
